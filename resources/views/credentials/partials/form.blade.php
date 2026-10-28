@@ -13,7 +13,9 @@
 </div>
 <div>
     <label for="password" class="mb-2 block text-sm font-medium text-stone-800">Password @if (! $isEdit)<span class="text-red-600">*</span>@endif</label>
-    <input id="password" name="password" type="password" @required(! $isEdit) maxlength="10000" autocomplete="{{ $isEdit ? 'new-password' : 'current-password' }}" class="w-full rounded-xl border border-stone-200 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100">
+    <input id="password" name="password" type="password" @required(! $isEdit) maxlength="10000" autocomplete="{{ $isEdit ? 'new-password' : 'current-password' }}" data-password-strength-input data-password-strength-target="credential-password-strength" class="w-full rounded-xl border border-stone-200 px-4 py-3 text-sm outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100">
+    <p id="credential-password-strength" data-password-strength role="status" aria-live="polite" class="mt-2 min-h-5 text-xs text-stone-500">Password strength: —</p>
+    <p class="mt-2 text-xs text-stone-500">Need a stronger password? <a href="{{ route('password.generator') }}" class="font-medium text-violet-700 hover:text-violet-800">Use the Password Generator</a>.</p>
     @if ($isEdit)
         <p class="mt-2 text-xs text-stone-500">Leave blank to keep the current password.</p>
     @endif

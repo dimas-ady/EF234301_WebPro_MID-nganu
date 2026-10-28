@@ -152,6 +152,56 @@ document.querySelectorAll('[data-copy-password]').forEach((button) => {
     });
 });
 
+const passwordStrengthStyles = {
+    Weak: ['text-red-600'],
+    Medium: ['text-amber-600'],
+    Strong: ['text-emerald-600'],
+};
+
+const getPasswordStrength = (password) => {
+    if (!password) {
+        return '—';
+    }
+
+    const categories = [
+        /[a-z]/.test(password),
+        /[A-Z]/.test(password),
+        /\d/.test(password),
+        /[^A-Za-z0-9]/.test(password),
+    ].filter(Boolean).length;
+
+    if (password.length >= 12 && categories >= 3) {
+        return 'Strong';
+    }
+
+    if (password.length >= 8 && categories >= 2) {
+        return 'Medium';
+    }
+
+    return 'Weak';
+};
+
+document.querySelectorAll('[data-password-strength-input]').forEach((input) => {
+    const indicator = document.getElementById(input.dataset.passwordStrengthTarget);
+
+    if (!indicator) {
+        return;
+    }
+
+    input.addEventListener('input', () => {
+        const strength = getPasswordStrength(input.value);
+
+        indicator.textContent = `Password strength: ${strength}`;
+        Object.values(passwordStrengthStyles).flat().forEach((className) => {
+            indicator.classList.remove(className);
+        });
+
+        if (passwordStrengthStyles[strength]) {
+            indicator.classList.add(...passwordStrengthStyles[strength]);
+        }
+    });
+});
+
 const passwordGenerator = document.querySelector('[data-password-generator]');
 
 if (passwordGenerator && !passwordGenerator.dataset.initialized) {

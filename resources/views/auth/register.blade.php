@@ -17,7 +17,8 @@
             </div>
             <div>
                 <label for="password" class="mb-2 block text-sm font-medium">Password</label>
-                <input id="password" name="password" type="password" required autocomplete="new-password" class="w-full rounded-lg border border-stone-300 px-3 py-2.5 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100">
+                <input id="password" name="password" type="password" required autocomplete="new-password" data-password-strength-input data-password-strength-target="register-password-strength" class="w-full rounded-lg border border-stone-300 px-3 py-2.5 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100">
+                <p id="register-password-strength" data-password-strength role="status" aria-live="polite" class="mt-2 min-h-5 text-xs text-stone-500">Password strength: —</p>
             </div>
             <div>
                 <label for="password_confirmation" class="mb-2 block text-sm font-medium">Confirm password</label>
